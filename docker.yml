@@ -1,22 +1,7 @@
 ---
 - hosts: "localhost"
+  become: true
   tasks: 
-    - name: Add a group called docker
-      group:
-        name: docker
-        state: present
-
-    - name: Add a user cicd-runner 
-      user:
-          name: cicd-runner
-          comment: cicd-runner
-
-    - name: Add a user cicd-runner and add them to a group docker
-      user:
-          name: cicd-runner
-          groups: docker
-          append: yes
-
     - name: add docker repository to yum 
       yum_repository:
             name: docker
@@ -25,10 +10,11 @@
             enabled: 1
             gpgcheck: 1
             gpgkey: https://download.docker.com/linux/centos/gpg
-    
     - name: yum install
       package:
         name: docker-ce
         state: latest
-    - name: systemd
-        state: started   
+    - name: "start proces"
+      service:
+              name: docker
+              state: started   
