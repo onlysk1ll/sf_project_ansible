@@ -31,4 +31,4 @@
         name: docker-ce
         state: latest
     - name: systemd
-        state: start    
+        state: started   

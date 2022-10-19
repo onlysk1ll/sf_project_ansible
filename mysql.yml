@@ -1,0 +1,13 @@
+---
+- hosts: "localhost"
+  become: true
+  tasks:
+    - name: yum mysql
+      package:
+        name: mysql
+        state: latest
+    - name: "start systemd"
+      become: true
+      service:
+              name: mysql.service
+              state: started    
